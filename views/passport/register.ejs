@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <% if (locals.user) { %>
+        <script type="text/javascript">
+            alert("이미 로그인 되었습니다..");
+            location.href = 'http://localhost:3003'
+        </script>
+    <% } %>
+    <link rel="stylesheet" href="../../src/css/main.css">
+    <link rel="stylesheet" href="../../src/css/passport.css">
+
+    <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
+    <script type="text/javascript">
+        function pass_check() {
+            let register_form = document.getElementById('register_form');
+            let email_value = document.getElementById('register_email').value
+            let p1 = document.getElementById('register_password').value
+            let p2 = document.getElementById('register_password_2').value
+
+            let email_check = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+
+            if (email_check.test(email_value) === true) {
+                if (p1 === p2) {
+                    // alert('비밀번호가 일치합니다.')
+                    register_form.submit()
+                } else if (p1 !== p2) {
+                    alert('비밀번호가 일치하지 않습니다.');
+                    document.getElementById('register_password').focus();
+                }
+            } else {
+                alert('이메일 형식이 잘못되었습니다.')
+                document.getElementById('register_email').focus()
+            }
+
+        }
+    </script>
+    <style>
+        input:focus {
+            outline: none;
+        }
+        .select_menu{
+            border-bottom: 1px solid #FFFFFF;
+            color: #8a8a8a;
+        }
+    </style>
+</head>
+<body>
+<%- include('../common/top_navbar') %>
+
+
+<div id="main_container" style="margin-top: 0; height: 100%">
+    <div style="display: flex; width: 100%; height: 100%; justify-content: center; align-items: center; flex-direction: column">
+        <div id="login_box">
+            <p id="login_box_welcome">Welcome!</p>
+            <p id="login_box_explain">Enter your information.</p>
+
+            <form id="register_form" action="/user_api/register" method="post">
+                <input name="register_name" id="register_name" class="register_input" type="text" placeholder="Name"
+                       autofocus autocomplete="off">
+                <input name="register_email" id="register_email" class="register_input" type="email"
+                       placeholder="E-mail" autocomplete="off">
+                <% if(locals.err_email){ %>
+                    <p class="regi_error"><%= locals.err_email %></p>
+                <% } %>
+
+                <input name="register_id" id="register_id" class="register_input" type="text" placeholder="ID"
+                       autocomplete="off">
+                <% if(locals.err_id){ %>
+                    <p class="regi_error"><%= locals.err_id %></p>
+                <% } %>
+                <input name="register_password" id="register_password" class="register_input" type="password"
+                       placeholder="PASSWORD" autocomplete="off">
+
+                <input name="register_password_2" id="register_password_2" class="register_input" type="password"
+                       placeholder="PASSWORD CHECK" autocomplete="off">
+
+
+                <button id="register_button" type="button" onclick="pass_check()">S I G N &nbsp; U P</button>
+            </form>
+
+        </div>
+        <p>Do you already have an account? <a href="http://localhost:3003/user/login" style="font-weight: bold; color: #527e56; cursor: pointer">Go to the Login</a></p>
+
+    </div>
+
+</div>
+
+</body>
+</html>

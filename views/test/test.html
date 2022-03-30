@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <link rel="stylesheet" href="../../src/css/main.css">
+    <link rel="stylesheet" href="../../src/css/my_page.css">
+
+    <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
+
+</head>
+<body>
+<div id="my_info_map_background">
+    <i class="fas fa-times" onclick="close_my_home_address()"></i>
+    <input type="text" name="asdfdsf">
+    <div id="map"></div>
+
+    <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
+    <script
+            src="https://maps.googleapis.com/maps/api/js?key=GoogleMapAPIKey&callback=initAutocomplete&libraries=places&v=weekly"
+            async
+    ></script>
+</div>
+<!--<div id="my_info_map_background_2">
+    <i class="fas fa-times" onclick="close_info()"></i>
+</div>-->
+<!--메뉴바-->
+<div id="top_navbar">
+    <div id="top_navbar_flex">
+        <div id="top_navbar_logo" class="top_navbar_item">
+            <div style="width: 300px; text-align: right">
+                <!--                <img id="top_navbar_logo_img" src="../src/images/logo.png" alt="">-->
+                <p id="top_navbar_logo_img"><a href="http://localhost:3003">N.B.N.</a></p>
+            </div>
+            <div style="margin-left: 20px; margin-right: -20px; margin-top: 3px; width: 300px">
+                <i class="fas fa-search"
+                   style="margin-right: -30px; font-size: 20px; margin-bottom: -2px; cursor: pointer"></i>
+                <input id="top_navbar_search" type="search" placeholder="Search">
+            </div>
+        </div>
+        <div id="top_navbar_menu" class="top_navbar_item">
+            <div class="top_navbar_menu_inline" onclick="location.href = 'http://localhost:3003'">
+                <p class="top_menu_text">HOME</p>
+            </div>
+            <div class="top_navbar_menu_inline select_menu" onclick="alert('아직 미완성 입니다.')">
+                <p class="top_menu_text">REAL TIME</p>
+            </div>
+            <div class="top_navbar_menu_inline" onclick="alert('아직 미완성 입니다.')">
+                <p class="top_menu_text">MAP</p>
+            </div>
+        </div>
+        <!--로그인 유무 확인-->
+
+        <div id="top_navbar_info" class="top_navbar_item">
+            <div id="top_navbar_icon">
+                <ul style="padding-left: 0">
+                    <li><i class="fas fa-bell"></i></li>
+                    <li><i class="fas fa-cog"></i></li>
+                    <li><i class="fas fa-sign-out-alt"
+                           onclick="location.href = 'http://localhost:3003/user_api/logout'"></i></li>
+                </ul>
+            </div>
+            <div id="top_navbar_profile"
+                 style="background: url('../src/images/profile/<%= locals.user.user_profile %>') center center; background-size: cover"
+                 onclick="location.href = 'http://localhost:3003/user/my_page'">
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div id="main_container" style="margin-top: 0; height: 100%">
+    <div style="display: flex; width: 100%; height: 100%; flex-direction: column;justify-content: center; align-items: center;">
+        <div id="my_page_box"
+             style="margin-top: -100px; display: flex; justify-content: space-around;align-items: center;">
+            <div style="width: 400px">
+                <div style="margin: 25px auto">
+                    <div id="my_page_profile_img"
+                         style="background: url('/src/images/profile/<%= locals.user.user_profile %>') center center; background-size: cover"></div>
+                </div>
+                <button id="my_page_profile_edit" onclick="profile_edit_click()">Change Profile</button>
+                <button id="my_page_profile_edit_apply" onclick="profile_edit_apply_click()">Apply Profile</button>
+
+                <form action="/user_api/profile" method="post" id="my_page_profile_edit_input_form"
+                      enctype="multipart/form-data">
+                    <input id="my_page_profile_edit_input_id" type="file" name="my_page_profile_edit_input"
+                           accept="image/png, image/jpg, image/jpeg">
+                    <input type="text" id="my_page_profile_edit_before_name_id"
+                           name="my_page_profile_edit_before_name" value="<%= locals.user.user_profile%>"/>
+                </form>
+            </div>
+            <div style="width: 400px">
+                <p id="my_page_profile_name">안정현</p>
+                <p id="my_page_profile_address" onclick="change_home_address()"><i class="fas fa-home"></i>경기 의정부시 의정부2동</p>
+            </div>
+        </div>
+        <div>
+            <div>
+                <p id="my_page_interest_title"><i class="fas fa-map-marker-alt"></i> INTEREST AREA</p>
+                <p id="my_page_interest_edit">EDIT</p>
+            </div>
+            <div id="my_page_interest_area">
+                <p class="my_page_interest_area_text">경기 의정부시 의정부2동</p>
+                <p class="my_page_interest_area_text">서울 성동구 왕십리로 222</p>
+                <p class="my_page_interest_area_text">서울 광진구 능동로 209 세종대학교</p>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    function profile_edit_click() {
+        document.getElementById('my_page_profile_edit_input_id').click();
+
+        document.getElementById('my_page_profile_edit').style.display = 'none';
+        document.getElementById('my_page_profile_edit_apply').style.display = 'inline-block';
+    }
+
+    function profile_edit_apply_click() {
+        document.getElementById('my_page_profile_edit_input_form').submit();
+
+        document.getElementById('my_page_profile_edit_apply').style.display = 'none';
+        document.getElementById('my_page_profile_edit').style.display = 'inline-block';
+    }
+</script>
+<% } %>
+<script type="text/javascript" src="../../src/js/main.js"></script>
+<script type="text/javascript" src="../../src/js/my_info.js"></script>
+</body>
+</html>

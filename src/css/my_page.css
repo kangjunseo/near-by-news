@@ -1,0 +1,203 @@
+@font-face {
+    font-family: NanumSquareRound;
+    src: url("../fonts/NanumFontSetup_TTF_SQUARE_ROUND/NanumSquareRoundR.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: NanumSquare;
+    src: url("../fonts/NanumFontSetup_TTF_SQUARE/NanumSquareR.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: NanumSquareL;
+    src: url("../fonts/NanumFontSetup_TTF_SQUARE/NanumSquareL.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: NanumSquareEB;
+    src: url("../fonts/NanumFontSetup_TTF_SQUARE/NanumSquareEB.ttf") format("truetype");
+}
+
+#my_page_box {
+    width: 800px;
+    margin-top: -40px;
+    background: #FFFFFF;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 0 20px #b7b7b7;
+}
+
+#my_page_profile_img {
+    /*background-size: cover;*/
+    display: inline-block;
+    border-radius: 50%;
+    width: 125px;
+    height: 125px;
+    overflow: hidden;
+    box-shadow: 0 0 0 3px #ffffff, 0 0 0 6px #649b69;
+}
+
+
+#my_page_profile_edit {
+    font-family: NanumSquare, sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 10px 14px 8px 14px;
+    cursor: pointer;
+    transition: 0.3s;
+    border: 1px solid #649b69;
+    color: #FFFFFF;
+    background: #649b69;
+    margin-bottom: 20px;
+}
+
+#my_page_profile_edit:hover {
+    background: #6fb374;
+    color: #FFFFFF;
+    border: 1px solid #6fb374;
+}
+
+#my_page_profile_edit_apply {
+    font-family: NanumSquare, sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 10px 14px 8px 14px;
+    cursor: pointer;
+    transition: 0.3s;
+    border: 1px solid #649b69;
+    color: #649b69;
+    background: #FFFFFF;
+    margin-bottom: 20px;
+    display: none;
+}
+
+#my_page_profile_edit_apply:hover {
+    border: 1px solid #FFFFFF;
+    color: #649b69;
+    background: #FFFFFF;
+}
+
+#my_page_profile_edit_input_form {
+    display: none;
+}
+
+#my_page_profile_name {
+    font-family: NanumSquareRound, sans-serif;
+    font-weight: bold;
+    font-size: 26px;
+    margin-top: 30px;
+    margin-bottom: 18px;
+    padding-right: 20px;
+}
+
+#my_page_profile_address .fa-home {
+    font-size: 18px;
+    margin-right: 6px;
+}
+
+#my_page_profile_address {
+    font-family: NanumSquareRound, sans-serif;
+    margin-top: 8px;
+    font-size: 18px;
+    padding-right: 20px;
+    cursor: pointer;
+}
+
+#my_page_interest_area {
+    /*height: 200px;*/
+    display: inline-block;
+    text-align: center;
+    width: 800px;
+    background: #FFFFFF;
+    /*margin-top: 50px;*/
+    border-radius: 5px;
+    box-shadow: 0 0 15px #bbbbbb;
+}
+
+#my_page_interest_title {
+    font-size: 22px;
+    margin-top: 20px;
+    margin-bottom: 5px;
+    font-family: NanumSquareRound, sans-serif;
+    font-weight: bold;
+    float: left;
+}
+
+#my_page_interest_edit {
+    font-size: 18px;
+    cursor: pointer;
+    margin: 0;
+    position: relative;
+    top: 30px;
+    font-family: NanumSquareRound, sans-serif;
+    font-weight: bold;
+    float: right;
+    border-bottom: 2px solid rgba(0, 0, 0, 0);
+}
+
+
+#my_page_interest_edit:hover {
+    border-bottom: 2px solid #000000;
+}
+
+#my_page_interest_title .fa-map-marker-alt {
+    font-size: 26px;
+}
+
+.my_page_interest_area_text {
+    font-family: NanumSquare, sans-serif;
+    font-size: 18px;
+    margin: 0;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.my_page_interest_area_text:first-child {
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+}
+
+.my_page_interest_area_text:last-child {
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+.my_page_interest_area_text:hover {
+    background: #649b69;
+    color: #FFFFFF;
+    transition: 0.2s;
+}
+
+.my_page_interest_area_text span {
+    font-weight: bold;
+}
+
+#my_info_map_background {
+    display: none;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 5;
+}
+
+#my_page_pac-input {
+    position: absolute;
+    z-index: 10;
+    top: 125px;
+    width: 350px;
+    left: 39%;
+    transition: 0.8s;
+    /*transform: translate(-50%, 0);*/
+    padding: 10px 10px 10px 10px;
+    font-size: 18px;
+    border: none;
+    box-shadow: 0 0 10px 2px #cfcfcf;
+}
+
+#my_page_pac-input:focus {
+    outline: none;
+}

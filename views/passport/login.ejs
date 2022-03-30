@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <% if (locals.user) { %>
+        <script type="text/javascript">
+            alert("이미 로그인 되었습니다..");
+            location.href = 'http://localhost:3003'
+        </script>
+    <% } %>
+    <link rel="stylesheet" href="../../src/css/main.css">
+    <link rel="stylesheet" href="../../src/css/passport.css">
+
+    <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
+    <style>
+        .select_menu{
+            border-bottom: 1px solid #FFFFFF;
+            color: #8a8a8a;
+        }
+    </style>
+</head>
+<body>
+<%- include('../common/top_navbar') %>
+
+
+<div id="main_container" style="margin-top: 0; height: 100%">
+    <div style="display: flex; width: 100%; height: 100%; justify-content: center; align-items: center; flex-direction: column">
+        <div id="login_box">
+            <p id="login_box_welcome">Welcome!</p>
+            <p id="login_box_explain">Enter your ID and password.</p>
+
+            <form action="/user_api/login" method="post">
+                <input name="login_id" id="login_id" class="login_input" type="text" placeholder="ID" autofocus autocomplete="on">
+                <input name="login_password" id="login_password" class="login_input" type="password" placeholder="PASSWORD">
+                <% if (locals.errMsg) { %>
+                    <p class="login_error"><%= locals.errMsg %></p>
+                <% } %>
+                <button id="login_button" type="submit">L O G I N</button>
+            </form>
+
+        </div>
+        <p>Don't you have an account? <a href="http://localhost:3003/user/register" style="font-weight: bold; color: #527e56; cursor: pointer">Go to the Register</a></p>
+
+    </div>
+
+</div>
+
+</body>
+</html>

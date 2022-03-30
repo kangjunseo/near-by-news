@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../../src/css/main.css">
+    <link rel="stylesheet" href="../../src/css/passport.css">
+
+    <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
+    <script type="text/javascript">
+        function pass_check() {
+            let register_form = document.getElementById('register_form');
+            let email_value = document.getElementById('register_email').value
+            let p1 = document.getElementById('register_password').value
+            let p2 = document.getElementById('register_password_2').value
+
+            let email_check = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+
+            if (email_check.test(email_value) === true){
+                if (p1 === p2) {
+                    alert('비밀번호가 일치합니다.')
+                    /*register_form.submit()*/
+                } else if (p1 !== p2) {
+                    alert('비밀번호가 일치하지 않습니다.');
+                    document.getElementById('register_password').focus();
+                }
+            }else{
+                alert('이메일 형식이 잘못되었습니다.')
+                document.getElementById('register_email').focus()
+            }
+
+        }
+    </script>
+    <style>
+        input:focus {
+            outline: none;
+        }
+    </style>
+</head>
+<body>
+<!--메뉴바-->
+<div id="top_navbar">
+    <div id="top_navbar_flex">
+        <div id="top_navbar_logo" class="top_navbar_item">
+            <img id="top_navbar_logo_img" src="../../src/images/logo.png" alt="">
+            <div style="margin-left: 20px; margin-right: -20px; margin-top: 3px;">
+                <i class="fas fa-search"
+                   style="margin-right: -30px; position: relative; z-index: 1; font-size: 20px; margin-bottom: -2px"></i>
+                <input id="top_navbar_search" type="search" placeholder="Search ..">
+            </div>
+        </div>
+        <div id="top_navbar_menu" class="top_navbar_item">
+            <div class="top_navbar_menu_inline select_menu">
+                <p class="top_menu_text">HOME</p>
+            </div>
+            <div class="top_navbar_menu_inline" onclick="alert('아직 미완성 입니다.')">
+                <p class="top_menu_text">REAL TIME</p>
+            </div>
+            <div class="top_navbar_menu_inline" onclick="alert('아직 미완성 입니다.')">
+                <p class="top_menu_text">MAP</p>
+            </div>
+            <div class="top_navbar_menu_inline" onclick="alert('아직 미완성 입니다.')">
+                <p class="top_menu_text">GROUPS</p>
+            </div>
+        </div>
+        <!--로그인 유무 확인-->
+
+        <!--세션 존재-->
+        <!--<div id="top_navbar_info" class="top_navbar_item">
+            <div id="top_navbar_icon">
+                <ul style="padding-left: 0">
+                    <li><i class="fas fa-bell"></i></li>
+                    <li><i class="fas fa-cog"></i></li>
+                </ul>
+            </div>
+            <div id="top_navbar_profile">
+            </div>
+        </div>-->
+
+        <!--세션 없음-->
+        <div id="before_top_navbar_info" class="top_navbar_item">
+            <div id="before_top_navbar_icon">
+                <ul style="padding-left: 0">
+                    <li><a href="#">Log in</a></li>
+                    <li><a href="#">Sign up</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="main_container" style="margin-top: 0; height: 100%">
+    <div style="display: flex; width: 100%; height: 100%; justify-content: center; align-items: center;">
+        <div id="login_box">
+            <p id="login_box_welcome">Welcome!</p>
+            <p id="login_box_explain">Enter your information.</p>
+
+            <form id="register_form" action="" method="post">
+                <input name="register_name" id="register_name" class="register_input" type="text" placeholder="Name"
+                       autofocus>
+                <input name="register_email" id="register_email" class="register_input" type="email"
+                       placeholder="E-mail">
+                <input name="register_id" id="register_id" class="register_input" type="text" placeholder="ID">
+
+                <input name="register_password" id="register_password" class="register_input" type="password"
+                       placeholder="PASSWORD">
+                <input name="register_password" id="register_password_2" class="register_input" type="password"
+                       placeholder="PASSWORD CHECK">
+
+
+                <button id="register_button" type="button" onclick="pass_check()">S I G N &nbsp; U P</button>
+            </form>
+
+        </div>
+        <p style="position: absolute; bottom: 150px">Do you already have an account? <a href="#"
+                                                                                        style="font-weight: bold; color: #527e56; cursor: pointer">Go
+            to the Login</a></p>
+
+    </div>
+
+</div>
+
+</body>
+</html>

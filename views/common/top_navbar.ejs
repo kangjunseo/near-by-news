@@ -1,0 +1,54 @@
+<!--메뉴바-->
+<div id="top_navbar">
+    <div id="top_navbar_flex">
+        <div id="top_navbar_logo" class="top_navbar_item">
+            <div style="width: 300px; text-align: right">
+                <!--                <img id="top_navbar_logo_img" src="../src/images/logo.png" alt="">-->
+                <p id="top_navbar_logo_img"><a href="http://localhost:3003">N.B.N.</a></p>
+            </div>
+            <div style="margin-left: 20px; margin-right: -20px; margin-top: 3px; width: 300px">
+                <i class="fas fa-search"
+                   style="margin-right: -30px; font-size: 20px; margin-bottom: -2px; cursor: pointer"></i>
+                <input id="top_navbar_search" type="search" placeholder="Search">
+            </div>
+        </div>
+        <div id="top_navbar_menu" class="top_navbar_item">
+            <div class="top_navbar_menu_inline" onclick="alert('아직 미완성 입니다.')">
+                <p class="top_menu_text">HOME</p>
+            </div>
+            <div class="top_navbar_menu_inline select_menu" onclick="location.href = 'http://localhost:3003'">
+                <p class="top_menu_text">REAL TIME</p>
+            </div>
+            <div class="top_navbar_menu_inline" onclick="location.href = 'http://localhost:3003/map'">
+                <p class="top_menu_text">MAP</p>
+            </div>
+        </div>
+        <!--로그인 유무 확인-->
+
+        <% if (locals.user){ %>
+            <div id="top_navbar_info" class="top_navbar_item">
+                <div id="top_navbar_icon">
+                    <ul style="padding-left: 0">
+                        <li><i class="fas fa-bell"></i></li>
+                        <li><i class="fas fa-cog"></i></li>
+                        <li><i class="fas fa-sign-out-alt"
+                               onclick="location.href = 'http://localhost:3003/user_api/logout'"></i></li>
+                    </ul>
+                </div>
+                <div id="top_navbar_profile"
+                     style="background: url('../src/images/profile/<%= locals.user.user_profile %>') center center; background-size: cover"
+                     onclick="location.href = 'http://localhost:3003/user/my_page'">
+                </div>
+            </div>
+        <% } else { %>
+            <div id="before_top_navbar_info" class="top_navbar_item">
+                <div id="before_top_navbar_icon">
+                    <ul style="padding-left: 0">
+                        <li><a href="http://localhost:3003/user/login">Log in</a></li>
+                        <li><a href="http://localhost:3003/user/register">Sign up</a></li>
+                    </ul>
+                </div>
+            </div>
+        <% } %>
+    </div>
+</div>

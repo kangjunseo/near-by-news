@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../src/css/main.css">
+    <link rel="stylesheet" href="../src/css/ImageSlide.css">
+
+    <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
+
+    <style>
+        .more {
+            font-weight: bold;
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+<div id="write_map_background">
+    <i class="fas fa-times" onclick="close_map()"></i>
+</div>
+<!--메뉴바-->
+<div id="top_navbar">
+    <div id="top_navbar_flex">
+        <div id="top_navbar_logo" class="top_navbar_item">
+            <div style="width: 300px; text-align: right;">
+                <!--<img id="top_navbar_logo_img" src="../src/images/logo.png" alt="">-->
+                <p id="top_navbar_logo_img">N.B.N.</p>
+            </div>
+            <div style="margin-left: 20px; margin-right: -20px; margin-top: 3px; width: 300px">
+                <i class="fas fa-search fa-lg"
+                   style="margin-right: -30px; margin-bottom: -2px; cursor: pointer"></i>
+                <input id="top_navbar_search" type="search" placeholder="Search ..">
+            </div>
+        </div>
+        <div id="top_navbar_menu" class="top_navbar_item">
+            <div class="top_navbar_menu_inline select_menu">
+                <p class="top_menu_text">HOME</p>
+            </div>
+            <div class="top_navbar_menu_inline" onclick="alert('아직 미완성 입니다.')">
+                <p class="top_menu_text">REAL TIME</p>
+            </div>
+            <div class="top_navbar_menu_inline" onclick="alert('아직 미완성 입니다.')">
+                <p class="top_menu_text">MAP</p>
+            </div>
+            <div class="top_navbar_menu_inline" onclick="alert('아직 미완성 입니다.')">
+                <p class="top_menu_text">GROUPS</p>
+            </div>
+        </div>
+        <div id="top_navbar_info" class="top_navbar_item">
+            <div id="top_navbar_icon">
+                <ul style="padding-left: 0">
+                    <li><i class="fas fa-bell"></i></li>
+                    <li><i class="fas fa-cog"></i></li>
+                </ul>
+            </div>
+            <div id="top_navbar_profile">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="main_container">
+
+    <!--왼쪽 메뉴바-->
+    <div id="main_left" class="main_item">
+        <div id="my_info">
+            <div id="my_info_profile_img"></div>
+
+            <p id="my_info_profile_name">안정현</p>
+            <p id="my_info_home"><i class="fas fa-home"></i>경기 의정부시 의정부2동</p>
+            <button id="save_contents_button">저장된 게시물</button>
+        </div>
+
+        <p id="interest_area_title"><i class="fas fa-map-marker-alt"></i>관심지역</p>
+        <div id="interest_area">
+            <!--버튼식으로 수정해보기-->
+
+            <p class="interest_area_text">경기 의정부시 의정부2동</p>
+            <p class="interest_area_text">서울 성동구 왕십리로 222</p>
+            <p class="interest_area_text">서울 광진구 능동로 209 세종대학교</p>
+        </div>
+
+        <p id="real_time_search"><i class="fas fa-chart-line"></i> 실시간 검색어</p>
+        <div id="real_time_search_table">
+            <div style="text-align: left; margin-left: 100px">
+                <p><span class="real_time_search_table_text">1</span> 서울 강남구 역삼동</p>
+                <p><span class="real_time_search_table_text">2</span> 서울 광진구 군자동</p>
+                <p><span class="real_time_search_table_text">3</span> 서울 성동구 사근동</p>
+                <p><span class="real_time_search_table_text">4</span> 경기 의정부시 의정부동</p>
+                <p><span class="real_time_search_table_text">5</span> 경기 의정부시 의정부동</p>
+                <p><span class="real_time_search_table_text">6</span> 경기 의정부시 의정부동</p>
+                <p><span class="real_time_search_table_text">7</span> 경기 의정부시 의정부동</p>
+                <p><span class="real_time_search_table_text">8</span> 경기 의정부시 의정부동</p>
+                <p><span class="real_time_search_table_text">9</span> 경기 의정부시 의정부동</p>
+                <p><span class="real_time_search_table_text" style="padding-right: 10px; margin-left: -8px">10</span> 경기
+                    의정부시 의정부동</p>
+            </div>
+        </div>
+    </div>
+
+    <!--가운데 컨테이너-->
+    <div id="main_center" class="main_item">
+        <div id="content_container">
+            <!--글 작성-->
+            <div id="what_happened">
+                <div id="happened_profile"></div>
+                <form action="" method="post" id="happened_form">
+                    <textarea id="what_happened_textarea" placeholder="안정현님, 지금 무슨일이 생겼나요?"></textarea>
+                    <div style="display: flex;">
+                        <div class="happened_bottom_ui">
+                            <label style="margin-right: 80px" id="map_label" for="upload_place"
+                                   onclick="upload_map()"><i
+                                    class="fas fa-map-marked-alt"></i><span style="font-size: 18px">위치 설정</span></label>
+                            <input type="text" id="upload_place" placeholder="장소 업로드">
+                            <input type="text" id="upload_coordinate" placeholder="좌표 업로드">
+
+                            <label style="margin-right: 10px" id="file_label" for="upload_file"><i
+                                    class="fas fa-images"></i><span
+                                    style="font-size: 18px; padding-left: 10px;">사진 업로드</span></label>
+                            <input type="file" id="upload_file" placeholder="파일 업로드" multiple onchange="file_name()"
+                                   accept="image/png, image/jpg, image/jpeg">
+
+                            <p id="file_list">이미지 선택되지 않음</p>
+                        </div>
+                        <div class="happened_bottom_ui">
+                            <button type="button" id="happened_submit" onclick="alert('아직 미완성 입니다.')">
+                                <span>UPLOAD</span></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <!--글 목록-->
+            <div class="contents_box">
+                <div class="main_top_info">
+                    <div class="main_top_profile">
+                        <div class="main_top_profile_img">
+                        </div>
+                    </div>
+                    <div class="main_top_center">
+                        <p class="main_top_name">IlJung Kim</p>
+                        <!--작성된게 올해가 아니면 연도 표시-->
+                        <p class="main_top_time">12:45 PM &#183; Feb 02, 2022 <span class="main_top_place"><i
+                                class="fas fa-map-marker-alt"></i>서울 성동구 왕십리</span></p>
+                    </div>
+                    <div class="main_top_left">
+                        <p><i class="fas fa-ellipsis-h"></i></p>
+                    </div>
+                </div>
+                <div class="main_content">
+                    <div id="main_content_text">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor est et eum harum, quis ratione?
+                        Architecto cumque mollitia veniam. In inventore neque repellendus soluta tempora, tempore unde
+                        vel voluptate! Obcaecati?
+                        <br>
+                        Lorem ipsum dolor sit amet, consec tetur adipisicing elit. Dolor est et eum harum, quis ratione?
+                        Architecto cumque mollitia veniam. In inventore neque repellendus soluta tempora, tempore unde
+                        vel voluptate! Obcaecati?
+                        <br>
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor est et eum harum, quis ratione?
+                        Architecto cumque mollitia veniam. In inventore neque repellendus soluta tempora, tempore unde
+                        vel voluptate! Obcaecati?
+                    </div>
+                    <div id="main_content_text_back">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor est et eum harum, quis ratione?
+                        Architecto cumque mollitia veniam. In inventore neque repellendus soluta tempora, tempore unde
+                        vel voluptate! Obcaecati?
+                        <br>
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor est et eum harum, quis ratione?
+                        Architecto cumque mollitia veniam. In inventore neque repellendus soluta tempora, tempore unde
+                        vel voluptate! Obcaecati?
+                        <br>
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor est et eum harum, quis ratione?
+                        Architecto cumque mollitia veniam. In inventore neque repellendus soluta tempora, tempore unde
+                        vel voluptate! Obcaecati?
+                    </div>
+                    <div class="imageSlide">
+                        <ul class="image_ul">
+                            <!--ejs로 숫자가 아닌 개별 num 주기-->
+                            <li class="image_list image_list_1 active"><img src="../src/images/contents/1.jpg" alt="">
+                            </li>
+                            <li class="image_list image_list_1"><img src="../src/images/contents/2.jpg" alt=""></li>
+                            <li class="image_list image_list_1"><img src="../src/images/contents/3.png" alt=""></li>
+                        </ul>
+                        <div class="imageSlide_button imageSlide_button_1">
+                            <span class="left_button" style="float: left" onclick="left_button_move(1)"><i
+                                    class="fas fa-chevron-left"></i></span>
+                            <span class="right_button" style="float: right" onclick="right_button_move(1)"><i
+                                    class="fas fa-chevron-right"></i></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="main_bottom">
+                    <div class="counting_people">
+                        <p><i class="fas fa-check-circle"></i> 12,143명의 사람들이 확인했습니다.</p>
+                    </div>
+                    <hr style="color: #555555; width: 655px; position: relative; top: -60px">
+                    <div class="main_bottom_ui">
+                        <div class="button_check">
+                            <i class="far fa-check-square"></i>
+                            <!--클릭이 되었을 때-->
+                            <!--<i class="fas fa-check-square"></i>-->
+                        </div>
+                        <div class="button_comment">
+                            <i class="far fa-comment-alt"></i>
+                        </div>
+                        <div class="button_share">
+                            <i class="far fa-share-square"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div id="main_right">
+        <p id="map_head">MAP</p>
+        <input id="pac-input" class="controls" type="text" placeholder="Search Box"/>
+        <div id="index_google_map" style="height: 100%"></div>
+        <script type="text/javascript"
+                src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1130a3923aaea5ae18d931b03340fad4"></script>
+        <script>
+            let container = document.getElementById('kakao_map');
+            let options = {
+                center: new kakao.maps.LatLng(37.5518, 127.0736),
+                level: 3
+            };
+
+            let map = new kakao.maps.Map(container, options);
+
+            let markerPosition = new kakao.maps.LatLng(37.5518, 127.0736);
+
+            // 마커를 생성합니다
+            let marker = new kakao.maps.Marker({
+                position: markerPosition
+            });
+            marker.setMap(map);
+
+        </script>
+    </div>
+</div>
+<script type="text/javascript" src="../src/js/ImageSlide.js"></script>
+<script type="text/javascript" src="../src/js/main.js"></script>
+<script type="text/javascript">
+    // let image_ul = document.getElementsByClassName('image_ul')
+    // let focus_img = document.getElementsByClassName('image_list_1');
+    // let imageSlide_button = document.getElementsByClassName('imageSlide_button');
+    //
+    // for (let i = 0; i < focus_img.length; i++) {
+    //     focus_img[i].addEventListener('mouseover', function () {
+    //
+    //         imageSlide_button[0].style.display = 'block';
+    //         let focus_img = document.getElementsByClassName('image_list_1');
+    //         let button_div = document.getElementsByClassName('imageSlide_button_1');
+    //
+    //         for (let i = 0; i < focus_img.length; i++) {
+    //             // button_div[i].style.top = '-' + ((focus_img[i].clientHeight / 2) + 70).toFixed(0) + 'px';
+    //
+    //         }
+    //
+    //     })
+    //     focus_img[i].addEventListener('mouseout', function () {
+    //         imageSlide_button[0].style.display = 'none';
+    //     })
+    //     imageSlide_button[0].addEventListener('mouseover', function () {
+    //         imageSlide_button[0].style.display = 'block';
+    //         let focus_img = document.getElementsByClassName('image_list_1');
+    //         let button_div = document.getElementsByClassName('imageSlide_button_1');
+    //
+    //         for (let i = 0; i < focus_img.length; i++) {
+    //             // button_div[i].style.top = '-' + ((focus_img[i].clientHeight / 2) + 70).toFixed(0) + 'px';
+    //
+    //         }
+    //
+    //     })
+    //     imageSlide_button[0].addEventListener('mouseout', function () {
+    //         imageSlide_button[0].style.display = 'none';
+    //     })
+    // }
+
+    //모든 hmtl태그(img 포함) 가 로딩된 후 실행됨.
+    window.addEventListener('load', function () {
+
+        }
+    )
+
+    function file_name() {
+        let input_files = document.getElementById('upload_file').files
+        // document.getElementsByClassName('file_list')[0].value = input_files[0].name
+        document.getElementById('file_list').innerHTML = input_files.length + "개의 이미지 선택됨";
+        document.getElementById('file_list').style.color = '#000000';
+        // document.getElementById('happened_profile').style.marginBottom = '74px'
+    }
+</script>
+<script type="text/javascript">
+    let tt = document.getElementById('main_content_text');
+    let tt2 = document.getElementById('main_content_text_back');
+
+    const contents_text_contents = tt.innerText
+    const contents_text_contents_length = contents_text_contents.length
+
+    let spann = document.createElement('span')
+    spann.className = 'more'
+    spann.innerText = " ..more";
+    spann.innerText = " ..more";
+    spann.setAttribute('onclick', 'spann_f()')
+    if (contents_text_contents_length > 200) {
+        tt.innerHTML = contents_text_contents.substr(0, 200)
+        tt.appendChild(spann)
+    }
+
+    function spann_f(num) {
+
+        tt.innerHTML = tt2.innerHTML
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <% if (!locals.user) { %>
+        <script type="text/javascript">
+            alert("로그인 정보가 없습니다.");
+            location.href = 'http://localhost:3003'
+        </script>
+    <% } %>
+    <link rel="stylesheet" href="/src/css/main.css">
+    <link rel="stylesheet" href="/src/css/my_page.css">
+
+    <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
+
+</head>
+<body>
+<div id="my_info_map_background">
+    <i class="fas fa-times" onclick="close_my_home_address()"></i>
+
+    <input id="my_page_pac-input" class="controls" type="text" placeholder="Search Box"/>
+    <div id="my_page_google_map" style="height: 90%; top: 96px"></div>
+
+    <form action="/user_api/change_home_address" method="post" style="display: none" id="change_home_address_form">
+        <input type="text" name="change_address_form_input_type" id="change_address_form_input_type_id">
+        <input type="text" name="change_home_address_form_input" id="change_home_address_form_input_id">
+    </form>
+    <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
+    <script
+            src="https://maps.googleapis.com/maps/api/js?key=GoogleMapAPIKey&callback=initAutocomplete&libraries=places&v=weekly"
+            async
+    ></script>
+</div>
+<%- include('../common/top_navbar') %>
+
+<% if (!locals.user) { %>
+
+<% } else{ %>
+    <div id="main_container" style="margin-top: 0; height: 100%">
+        <div style="display: flex; width: 100%; height: 100%; flex-direction: column;justify-content: center; align-items: center;">
+            <div id="my_page_box"
+                 style="margin-top: -100px; display: flex; justify-content: space-around;align-items: center;">
+                <div style="width: 400px">
+                    <div style="margin: 25px auto">
+                        <div id="my_page_profile_img"
+                             style="background: url('/src/images/profile/<%= locals.user.user_profile %>') center center; background-size: cover"></div>
+                    </div>
+                    <button id="my_page_profile_edit" onclick="profile_edit_click()">Change Profile</button>
+                    <button id="my_page_profile_edit_apply" onclick="profile_edit_apply_click()">Apply Profile</button>
+
+                    <form action="/user_api/profile" method="post" id="my_page_profile_edit_input_form"
+                          enctype="multipart/form-data">
+                        <input id="my_page_profile_edit_input_id" type="file" name="my_page_profile_edit_input"
+                               accept="image/png, image/jpg, image/jpeg">
+                        <input type="text" id="my_page_profile_edit_before_name_id"
+                               name="my_page_profile_edit_before_name" value="<%= locals.user.user_profile %>"/>
+                    </form>
+                </div>
+                <div style="width: 400px">
+                    <p id="my_page_profile_name"><%= locals.user.name %></p>
+                    <% if (locals.user.user_address === null ){ %>
+                        <p id="my_page_profile_address" onclick="open_my_home_address(0)"><i
+                                    class="fas fa-home"></i> Please click and set your address. </p>
+                    <% } else { %>
+                        <p id="my_page_profile_address" onclick="open_my_home_address(0)"><i
+                                    class="fas fa-home"></i> <%= locals.user.user_address %></p>
+                    <% } %>
+                </div>
+            </div>
+            <div>
+                <div>
+                    <p id="my_page_interest_title"><i class="fas fa-map-marker-alt"></i> INTEREST AREA</p>
+                    <!--<p id="my_page_interest_edit">EDIT</p>-->
+                </div>
+                <div id="my_page_interest_area">
+                    <% if (JSON.parse(locals.user.user_interest_areas)[0] === null) { %>
+                        <p class="my_page_interest_area_text" onclick="open_my_home_address(1)">-</p>
+                    <% } else { %>
+                        <p class="my_page_interest_area_text"
+                           onclick="open_my_home_address(1)"><%= JSON.parse(locals.user.user_interest_areas)[0] %></p>
+                    <% } %>
+
+                    <% if (JSON.parse(locals.user.user_interest_areas)[1] === null) { %>
+                        <p class="my_page_interest_area_text" onclick="open_my_home_address(2)">-</p>
+                    <% } else { %>
+                        <p class="my_page_interest_area_text"
+                           onclick="open_my_home_address(2)"><%= JSON.parse(locals.user.user_interest_areas)[1] %></p>
+                    <% } %>
+
+                    <% if (JSON.parse(locals.user.user_interest_areas)[2] === null) { %>
+                        <p class="my_page_interest_area_text" onclick="open_my_home_address(3)">-</p>
+                    <% } else { %>
+                        <p class="my_page_interest_area_text"
+                           onclick="open_my_home_address(3)"><%= JSON.parse(locals.user.user_interest_areas)[2] %></p>
+                    <% } %>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        function profile_edit_click() {
+            document.getElementById('my_page_profile_edit_input_id').click();
+
+            document.getElementById('my_page_profile_edit').style.display = 'none';
+            document.getElementById('my_page_profile_edit_apply').style.display = 'inline-block';
+        }
+
+        function profile_edit_apply_click() {
+            document.getElementById('my_page_profile_edit_input_form').submit();
+
+            document.getElementById('my_page_profile_edit_apply').style.display = 'none';
+            document.getElementById('my_page_profile_edit').style.display = 'inline-block';
+        }
+    </script>
+<% } %>
+<script type="text/javascript" src="/src/js/my_info.js"></script>
+</body>
+</html>

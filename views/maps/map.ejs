@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <link rel="stylesheet" href="../../src/css/main.css">
+    <link rel="stylesheet" href="../../src/css/passport.css">
+
+    <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    <script src="https://unpkg.com/@googlemaps/markerclusterer/dist/index.min.js"></script>
+
+    <script src="../../src/js/google_map/map_clustering.js"></script>
+
+    <style>
+        .top_navbar_menu_inline:nth-of-type(3) {
+            border-bottom: 5px solid #649b69;
+            color: #649b69;
+        }
+
+        .select_menu {
+            border-bottom: 1px solid #FFFFFF;
+            color: #8a8a8a;
+        }
+    </style>
+</head>
+<body>
+<%- include('../common/top_navbar') %>
+
+<div style="height: 100%; width: 100%">
+    <div id="index_google_map" style="height: 100%"></div>
+    <script
+            src="https://maps.googleapis.com/maps/api/js?key=GoogleMapAPIKey&callback=initAutocomplete&libraries=places&v=weekly"
+            async
+    ></script>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,184 @@
+@font-face {
+    font-family: NanumSquareRound;
+    src: url("../fonts/NanumFontSetup_TTF_SQUARE_ROUND/NanumSquareRoundR.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: NanumSquare;
+    src: url("../fonts/NanumFontSetup_TTF_SQUARE/NanumSquareR.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: NanumSquareL;
+    src: url("../fonts/NanumFontSetup_TTF_SQUARE/NanumSquareL.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: NanumSquareEB;
+    src: url("../fonts/NanumFontSetup_TTF_SQUARE/NanumSquareEB.ttf") format("truetype");
+}
+
+#login_box {
+    width: 600px;
+    margin-top: -40px;
+    background: #FFFFFF;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 0 20px #b7b7b7;
+}
+
+#login_box_welcome {
+    font-family: NanumSquareEB;
+    font-size: 40px;
+    color: #363636;
+    margin-bottom: 0;
+}
+
+#login_box_explain {
+    font-family: NanumSquare;
+    font-size: 20px;
+    color: #363636;
+    margin-top: 10px;
+    margin-bottom: 70px;
+}
+
+.not_login_button {
+    font-family: NanumSquareEB;
+    font-size: 18px;
+    border-radius: 5px;
+    padding: 12px 30px 10px 30px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.not_login_button:nth-child(1) {
+    border: 1px solid #649b69;
+    color: #FFFFFF;
+    background: #649b69;
+}
+
+.not_login_button:nth-child(1):hover {
+    background: #8cc491;
+    transition: 0.3s;
+    border: 1px solid #8cc491;
+}
+
+.not_login_button:nth-child(2) {
+    border: 1px solid #649b69;
+    color: #649b69;
+    background: #ffffff;
+}
+
+.not_login_button:nth-child(2):hover {
+    background: #8cc491;
+    border: 1px solid #8cc491;
+    color: #FFFFFF;
+    transition: 0.3s;
+}
+
+
+.not_login_button:focus {
+    outline: none;
+}
+
+.login_input:focus {
+    outline: none;
+}
+
+.register_input:focus {
+    outline: none;
+}
+
+.login_input {
+    display: block;
+    width: 80%;
+    padding: 10px 15px 10px 15px;
+    font-family: NanumSquare;
+    font-size: 18px;
+    margin: 0 auto;
+    border-radius: 5px;
+    border: 1px solid #e0e0e0;
+}
+
+.register_input {
+    display: block;
+    width: 80%;
+    padding: 10px 15px 10px 15px;
+    font-family: NanumSquare;
+    font-size: 18px;
+    margin: 0 auto 15px;
+    border-radius: 5px;
+    border: 1px solid #e0e0e0;
+}
+
+#login_id {
+    margin-bottom: 30px;
+}
+
+#register_id {
+}
+
+#register_password, #register_password_2 {
+    font-family: unset;
+}
+
+#login_password {
+    font-family: unset;
+}
+
+.regi_error {
+    font-size: 18px;
+    margin-top: 0;
+    margin-bottom: 10px;
+    color: red;
+}
+
+.login_error {
+    font-size: 18px;
+    margin-bottom: 0;
+    color: red;
+}
+
+#login_button {
+    width: 85%;
+    padding: 13px 15px 13px 15px;
+    font-family: NanumSquare;
+    font-size: 18px;
+    margin: 29px auto;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+    background: #649b69;
+    color: #FFFFFF;
+    border: 1px solid rgba(0, 0, 0, 0);
+
+}
+
+#register_button {
+    width: 85%;
+    padding: 13px 15px 13px 15px;
+    font-family: NanumSquare;
+    font-size: 18px;
+    margin: 29px auto;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+    background: #649b69;
+    color: #FFFFFF;
+    border: 1px solid rgba(0, 0, 0, 0);
+
+}
+
+#login_button:hover {
+    background: #FFFFFF;
+    color: #649b69;
+    border: 1px solid #649b69;
+    transition: 0.3s;
+}
+
+#register_button:hover {
+    background: #FFFFFF;
+    color: #649b69;
+    border: 1px solid #649b69;
+    transition: 0.3s;
+}

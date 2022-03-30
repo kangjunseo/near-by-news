@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../src/css/main.css">
+    <link rel="stylesheet" href="../src/css/ImageSlide.css">
+    <link rel="stylesheet" href="../src/css/passport.css">
+
+    <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
+    <% if (locals.user) { %>
+        <script src="/src/js/AutoComplete.js"></script>
+    <% } %>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+</head>
+<body>
+<div id="write_map_background">
+    <i class="fas fa-times" onclick="close_map()"></i>
+</div>
+<%- include('./common/top_navbar') %>
+
+<% if (!locals.user) { %>
+    <div id="main_container" style="margin-top: 0; height: 100%">
+        <div style="display: flex; width: 100%; height: 100%; justify-content: center; align-items: center;">
+            <div id="login_box" style="margin-top: -215px">
+                <p id="login_box_welcome">로그인 정보가 없습니다. :(</p>
+                <p id="login_box_explain" style="margin-bottom: 30px">You are not logged in. :(</p>
+                <div style="margin: 40px auto">
+                    <button class="not_login_button" onclick="location.href = 'http://localhost:3003/user/login'">
+                        LOGIN
+                    </button>
+                    <button class="not_login_button"
+                            onclick="location.href = 'http://localhost:3003/user/register'">SIGN UP
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+<% } else { %>
+    <div id="main_container">
+
+        <!--왼쪽 메뉴바-->
+        <div id="main_left" class="main_item">
+            <div id="my_info">
+                <div id="my_info_profile_img"
+                     style="background: url('/src/images/profile/<%= locals.user.user_profile %>') center center; background-size: cover"></div>
+
+                <p id="my_info_profile_name"><%= locals.user.name %></p>
+                <p id="my_info_home"><i class="fas fa-home"></i>경기 의정부시 의정부2동</p>
+                <button id="save_contents_button" onclick="location.href = 'http://localhost:3003/user/my_page'">My
+                    Info
+                </button>
+            </div>
+
+            <!--            <p id="interest_area_title"><i class="fas fa-map-marker-alt"></i>관심지역</p>-->
+            <p id="interest_area_title"><i class="fas fa-map-marker-alt"></i>Interest Area</p>
+            <div id="interest_area">
+                <!--버튼식으로 수정해보기-->
+                <% if (JSON.parse(locals.user.user_interest_areas)[0] === null) { %>
+                    <p class="interest_area_text" onclick="go_map_interest_areas('<%= JSON.parse(locals.user.user_interest_areas)[0] %>')">-</p>
+                <% } else { %>
+                    <p class="interest_area_text"
+                       onclick="go_map_interest_areas('<%= JSON.parse(locals.user.user_interest_areas)[0] %>')"><%= JSON.parse(locals.user.user_interest_areas)[0] %></p>
+                <% } %>
+
+                <% if (JSON.parse(locals.user.user_interest_areas)[1] === null) { %>
+                    <p class="interest_area_text" onclick="go_map_interest_areas('<%= JSON.parse(locals.user.user_interest_areas)[1] %>')">-</p>
+                <% } else { %>
+                    <p class="interest_area_text"
+                       onclick="go_map_interest_areas('<%= JSON.parse(locals.user.user_interest_areas)[1] %>')"><%= JSON.parse(locals.user.user_interest_areas)[1] %></p>
+                <% } %>
+
+                <% if (JSON.parse(locals.user.user_interest_areas)[2] === null) { %>
+                    <p class="interest_area_text" onclick="go_map_interest_areas('<%= JSON.parse(locals.user.user_interest_areas)[2] %>')">-</p>
+                <% } else { %>
+                    <p class="interest_area_text"
+                       onclick="go_map_interest_areas('<%= JSON.parse(locals.user.user_interest_areas)[2] %>')"><%= JSON.parse(locals.user.user_interest_areas)[2] %></p>
+                <% } %>
+            </div>
+
+            <p id="real_time_search"><i class="fas fa-chart-line"></i> Real-Time Search</p>
+            <!--            <p id="real_time_search"><i class="fas fa-chart-line"></i> 실시간 검색어</p>-->
+            <div id="real_time_search_table">
+                <div style="text-align: left; margin-left: 100px">
+                    <!--<p><span class="real_time_search_table_text">1</span> 서울 강남구 역삼동</p>
+                    <p><span class="real_time_search_table_text">2</span> 서울 광진구 군자동</p>
+                    <p><span class="real_time_search_table_text">3</span> 서울 성동구 사근동</p>
+                    <p><span class="real_time_search_table_text">4</span> 경기 의정부시 의정부동</p>
+                    <p><span class="real_time_search_table_text">5</span> 경기 의정부시 의정부동</p>
+                    <p><span class="real_time_search_table_text">6</span> 경기 의정부시 의정부동</p>
+                    <p><span class="real_time_search_table_text">7</span> 경기 의정부시 의정부동</p>
+                    <p><span class="real_time_search_table_text">8</span> 경기 의정부시 의정부동</p>
+                    <p><span class="real_time_search_table_text">9</span> 경기 의정부시 의정부동</p>
+                    <p><span class="real_time_search_table_text"
+                             style="padding-right: 10px; margin-left: -8px">10</span> 경기
+                        의정부시 의정부동</p>-->
+                    <p><span class="real_time_search_table_text">1</span> -</p>
+                    <p><span class="real_time_search_table_text">2</span> -</p>
+                    <p><span class="real_time_search_table_text">3</span> -</p>
+                    <p><span class="real_time_search_table_text">4</span> -</p>
+                    <p><span class="real_time_search_table_text">5</span> -</p>
+                    <p><span class="real_time_search_table_text">6</span> -</p>
+                    <p><span class="real_time_search_table_text">7</span> -</p>
+                    <p><span class="real_time_search_table_text">8</span> -</p>
+                    <p><span class="real_time_search_table_text">9</span> -</p>
+                    <p><span class="real_time_search_table_text"
+                             style="padding-right: 10px; margin-left: -8px">10</span> -</p>
+                </div>
+            </div>
+        </div>
+
+        <!--가운데 컨테이너-->
+        <div id="main_center" class="main_item">
+            <div id="content_container">
+                <!--글 작성-->
+                <div id="what_happened">
+                    <div id="happened_profile"
+                         style="background: url('/src/images/profile/<%= locals.user.user_profile %>') center center; background-size: cover"></div>
+                    <form action="/user_api/upload/post" method="post" id="happened_form" enctype="multipart/form-data">
+                        <div class="autocomplete-wrapper">
+                            <input type="text" name="post_tag" id="autocomplete" placeholder="Type of accident"
+                                   autocomplete="off">
+                        </div>
+                        <textarea name="what_happened_textarea" id="what_happened_textarea"
+                                  placeholder="What happened?"></textarea>
+                        <div style="display: flex;">
+                            <div class="happened_bottom_ui">
+                                <label id="map_label" for="upload_place" onclick="upload_map()"><i
+                                            class="fas fa-map-marked-alt"></i><span
+                                            style="font-size: 18px; padding-left: 10px;position: relative;top: -1px; font-weight: bold;">Location</span></label>
+                                <input type="text" name="upload_place" id="upload_place" placeholder="장소 업로드">
+                                <input type="text" name="upload_coordinate" id="upload_coordinate" placeholder="좌표 업로드">
+
+                                <label id="file_label" for="upload_photos"><i
+                                            class="fas fa-images"></i><span
+                                            style="font-size: 18px; padding-left: 10px;position: relative; top: -2px;font-weight: bold;">Photo</span></label>
+                                <input type="file" id="upload_photos" name="upload_photos" placeholder="파일 업로드" multiple
+                                       onchange="file_name()"
+                                       accept="image/png, image/jpg, image/jpeg">
+
+                                <p id="file_list">이미지 선택되지 않음</p>
+                            </div>
+                            <input type="text" name="user_name"
+                                   value="<%= locals.user.name %>"
+                                   style="display: none">
+                            <input type="text" name="user_id"
+                                   value="<%= locals.user.id %>"
+                                   style="display: none">
+                            <input type="text" name="profile_img"
+                                   value="<%= locals.user.user_profile %>"
+                                   style="display: none">
+                            <div class="happened_bottom_ui">
+                                <button type="button" id="happened_submit" onclick="func_happened_submit()">
+                                    <span>UPLOAD</span></button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <!--글 목록-->
+                <!--여기서부터 박스-->
+                <% if (locals.first_post){ %>
+                    <% for(var i = 0; i < 3; i++){ %>
+                        <div class="contents_box">
+                            <div class="main_top_info">
+                                <div class="main_top_profile">
+                                    <div class="main_top_profile_img"
+                                         style="background: url('/src/images/profile/<%= locals.first_post[i].user_profile %>') center center; background-size: cover;">
+                                    </div>
+                                </div>
+                                <div class="main_top_center">
+                                    <p class="main_top_name"><%= locals.first_post[i].user_name %></p>
+                                    <!--작성된게 올해가 아니면 연도 표시-->
+                                    <p class="main_top_time"><%= JSON.stringify(locals.first_post[i].time).substr(11, 3) %>:<%= JSON.stringify(locals.first_post[i].time).substr(15, 2) %> &#183;
+                                        <%= Number(JSON.stringify(locals.first_post[i].time).substr(6, 2))%>/<%= Number(JSON.stringify(locals.first_post[i].time).substr(9, 2)) %>, <%= JSON.stringify(locals.first_post[i].time).substr(1, 4) %> <span
+
+                                                class="main_top_place"><i
+                                                    class="fas fa-map-marker-alt"></i><%= locals.first_post[i].place %></span>
+                                    </p>
+                                </div>
+                                <div class="main_top_left">
+                                    <p><i class="fas fa-ellipsis-h"></i></p>
+                                </div>
+                            </div>
+                            <div class="main_content">
+                                <div id="main_content_text_<%= locals.first_post[i].serial_post_id %>"
+                                     class="main_content_text">
+                                    <%- locals.first_post[i].content.replace(/\r\n|\n/g, '<br/>') %>
+                                </div>
+                                <div id="main_content_text_back_<%= locals.first_post[i].serial_post_id %>"
+                                     class="main_content_text_back">
+                                    <%- locals.first_post[i].content.replace(/\r\n|\n/g, '<br/>') %>
+                                </div>
+                                <div class="imageSlide">
+                                    <ul class="image_ul">
+                                        <!--ejs로 숫자가 아닌 개별 num 주기-->
+                                        <% var picture = JSON.parse(locals.first_post[i].picture); %>
+                                        <% if(picture !== null) { %>
+                                            <% for(var a = 0; a < picture.length; a++){ %>
+
+                                                <% if(a === 0){ %>
+                                                    <li class="image_list image_list_<%= i %> active"><img
+                                                                src="../src/images/contents/<%= picture[a] %>"
+                                                                alt="">
+                                                    </li>
+
+                                                <% } else { %>
+                                                    <li class="image_list image_list_<%= i %>"><img
+                                                                src="../src/images/contents/<%= picture[a] %>"
+                                                                alt="">
+                                                    </li>
+                                                <% } %>
+                                            <% } %>
+                                        <% } %>
+
+                                    </ul>
+                                    <% if (picture === null) { %>
+                                        <div class="imageSlide_button imageSlide_button_<%= i %>"
+                                             style="visibility: hidden">
+                            <span class="left_button" style="float: left" onclick="left_button_move(<%= i %>)"><i
+                                        class="fas fa-chevron-left"></i></span>
+                                            <span class="right_button" style="float: right"
+                                                  onclick="right_button_move(<%= i %>)"><i
+                                                        class="fas fa-chevron-right"></i></span>
+                                        </div>
+                                    <% } else if (picture.length === 1) { %>
+                                        <div class="imageSlide_button imageSlide_button_<%= i %>"
+                                             style="visibility: hidden">
+                            <span class="left_button" style="float: left" onclick="left_button_move(<%= i %>)"><i
+                                        class="fas fa-chevron-left"></i></span>
+                                            <span class="right_button" style="float: right"
+                                                  onclick="right_button_move(<%= i %>)"><i
+                                                        class="fas fa-chevron-right"></i></span>
+                                        </div>
+                                        <% /*여기서만 작동함*/ %>
+                                    <% } else { %>
+                                        <div class="imageSlide_button imageSlide_button_<%= i %>">
+                            <span class="left_button" style="float: left" onclick="left_button_move(<%= i %>)"><i
+                                        class="fas fa-chevron-left"></i></span>
+                                            <span class="right_button" style="float: right"
+                                                  onclick="right_button_move(<%= i %>)"><i
+                                                        class="fas fa-chevron-right"></i></span>
+                                        </div>
+                                    <% } %>
+
+                                </div>
+                            </div>
+                            <div class="main_bottom">
+                                <div class="counting_people">
+                                    <% if(locals.first_post[i].checks_count === 1) { %>
+                                        <p><i class="fas fa-check-circle"></i> <span
+                                                    id="<%= locals.first_post[i].serial_post_id %>_<%= locals.user.id %>_check_count"><%= JSON.stringify(locals.first_post[i].checks_count).replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ","); %></span>
+                                            person checked.</p>
+                                    <% } else { %>
+                                        <p><i class="fas fa-check-circle"></i> <span
+                                                    id="<%= locals.first_post[i].serial_post_id %>_<%= locals.user.id %>_check_count"><%= JSON.stringify(locals.first_post[i].checks_count).replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ","); %></span>
+                                            people checked.</p>
+                                    <% } %>
+                                </div>
+                                <hr style="color: #555555; width: 655px; position: relative; top: -60px">
+                                <div class="main_bottom_ui">
+                                    <div class="button_check">
+                                        <span id="<%= locals.first_post[i].serial_post_id %>_<%= locals.user.id %>_no_check"
+                                              onclick="check_plus('<%= locals.first_post[i].serial_post_id %>', '<%= locals.user.id %>')"><i
+                                                    class="far fa-check-square"></i></span>
+                                        <!--클릭이 되었을 때-->
+                                        <span id="<%= locals.first_post[i].serial_post_id %>_<%= locals.user.id %>_check"
+                                              style="display: none"
+                                              onclick="check_minus('<%= locals.first_post[i].serial_post_id %>', '<%= locals.user.id %>')"><i
+                                                    style="color: #c90000" class="fas fa-check-square"></i></span>
+                                    </div>
+                                    <script type="text/javascript">
+                                        /*console.log(('/post_api/check_exist?serial_post_id= locals.first_post[i].serial_post_id ' + '&id= locals.user.id '))*/
+                                        axios.get('/post_api/check_exist?serial_post_id=<%= locals.first_post[i].serial_post_id %>' + '&id=<%= locals.user.id %>').then((check_exist) => {
+                                            if (check_exist.data.du_exist === 1) {
+                                                document.getElementById('<%= locals.first_post[i].serial_post_id %>_<%= locals.user.id %>_no_check').style.display = 'none';
+                                                document.getElementById('<%= locals.first_post[i].serial_post_id %>_<%= locals.user.id %>_check').style.display = 'inline-block';
+                                            }
+                                        }).catch(err => {
+                                            console.log(err)
+                                        })
+                                    </script>
+                                    <div class="button_comment">
+                                        <i class="far fa-comment-alt"></i>
+                                    </div>
+                                    <div class="button_share">
+                                        <i class="far fa-share-square"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <script type="text/javascript">
+                            let tt_<%= i %> = document.getElementById('main_content_text_<%= locals.first_post[i].serial_post_id %>');
+                            let tt2_<%= i %> = document.getElementById('main_content_text_back_<%= locals.first_post[i].serial_post_id %>');
+
+                            const contents_text_contents_<%= i %> = tt_<%= i %>.innerText
+                            const contents_text_contents_length_<%= i %> = contents_text_contents_<%= i %>.length
+
+                            let spann_<%= i %> = document.createElement('span')
+                            spann_<%= i %>.className = 'more'
+                            spann_<%= i %>.innerText = " ..more";
+                            spann_<%= i %>.innerText = " ..more";
+                            spann_<%= i %>.setAttribute('onclick', 'spann_f_<%= i %>()')
+                            // if (contents_text_contents_length > 153) {
+                            if (tt_<%= i %>.offsetHeight > 72) {
+                                tt_<%= i %>.innerHTML = contents_text_contents_<%= i %>.substr(0, 153)
+                                tt_<%= i %>.appendChild(spann_<%= i %>)
+                            }
+
+                            function spann_f_<%= i %>(num) {
+                                tt_<%= i %>.innerHTML = tt2_<%= i %>.innerHTML
+                            }
+                        </script>
+                        <!--여기까지가 박스-->
+                    <% } %>
+                <% } else { %>
+                    <p id='last_post_error'>There are no more posts.</p>
+                <% } %>
+            </div>
+        </div>
+        <div id="main_right">
+            <p id="map_head">MAP</p>
+            <input id="pac-input" class="controls" type="text" placeholder="Search Box"/>
+            <div id="index_google_map" style="height: 100%"></div>
+            <script
+                    src="https://maps.googleapis.com/maps/api/js?key=GoogleMapAPIKey&callback=initAutocomplete&libraries=places&v=weekly"
+                    async
+            ></script>
+            <script type="text/javascript" src="../src/js/main.js"></script>
+
+        </div>
+    </div>
+
+<% } %>
+<script type="text/javascript" src="../src/js/ImageSlide.js"></script>
+<script type="text/javascript" src="../src/js/InfinityScroll.js"></script>
+<script type="text/javascript" src="../src/js/posts_checks.js"></script>
+
+<script type="text/javascript">
+    function go_map_interest_areas(interest_area){
+        location.href = "http://localhost:3003/user/my_page"
+    }
+
+    function spann_f_(num) {
+        document.getElementById('main_content_text_' + num).innerHTML = document.getElementById('main_content_text_back_' + num).innerHTML
+    }
+
+    function file_name() {
+        let input_files = document.getElementById('upload_photos').files
+        // document.getElementsByClassName('file_list')[0].value = input_files[0].name
+        document.getElementById('file_list').innerHTML = input_files.length + "개의 이미지 선택됨";
+        document.getElementById('file_list').style.color = '#000000';
+        // document.getElementById('happened_profile').style.marginBottom = '74px'
+    }
+
+    //태그 autocomplete
+    let list = ['화재', '붕괴', '폭발', '교통사고', '환경오염', '태풍', '홍수', '호우', '폭설', '폭풍', '가뭄', '지진'];
+    new AutoComplete(document.querySelector('#autocomplete'), list);
+
+    let auto_input = document.getElementById("autocomplete");
+    let happened_form = document.getElementById("happened_form");
+    let happened_textarea = document.getElementById("what_happened_textarea");
+    let upload_place_check = document.getElementById("upload_place");
+
+    function input_ch(ch_text) {
+        auto_input.value = ch_text
+        let auto_ul = document.getElementById("auto_ul");
+        auto_ul.style.cssText = "display: none"
+    }
+
+    function func_happened_submit() {
+        if (!auto_input.value) {
+            alert('사고 종류 설정이 되지 않았습니다.');
+        } else {
+            if (list.includes(auto_input.value) === true) {
+                if (!happened_textarea.value) {
+                    alert('내용이 없습니다.');
+                } else {
+                    if (!upload_place_check.value) {
+                        alert('위치를 설정하셔야됩니다.');
+                    } else {
+                        happened_form.submit()
+                    }
+                }
+            } else {
+                alert("사고 종류가 DB에 없습니다.")
+            }
+        }
+    }
+
+    let body = document.querySelector("html");
+    body.addEventListener('click', function (e) {
+        let target = e.target;
+        try {
+            if (target !== document.getElementById('auto_ul')) {
+                document.getElementById('auto_ul').style.display = 'none';
+            }
+        } catch (e) {
+
+        }
+
+    });
+
+
+</script>
+</body>
+</html>
